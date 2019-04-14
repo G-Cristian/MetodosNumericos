@@ -1,4 +1,0 @@
-*.aux
-*.idx
-*.log
-*.gz
