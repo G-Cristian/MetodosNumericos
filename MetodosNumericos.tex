@@ -1,20 +1,77 @@
-\documentclass[10pt,a4paper,twoside]{article}
+\documentclass[12pt,a4paper,twoside]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{graphicx}
 \author{Cristian}
 \title{Métodos Numéricos \\
 \large Teoremas, propiedades y más}
 \makeindex
 
-\newcommand{\definicion}[1]{\textbf{Definición:} #1}
-\newcommand{\prop}[1]{\textbf{Propiedad:} #1}
-\newcommand{\propDem}[2]{\textbf{Propiedad:} #1 \\ \textbf{Dem:} #2}
+\newcounter{DefCounter}
+\setcounter{DefCounter}{0}
+\newcounter{PropCounter}
+\setcounter{PropCounter}{0}
+
+\newcommand{\definicion}[1]{
+\stepcounter{DefCounter}
+
+\textbf{\underline{\scalebox{1.1}{Definición \arabic{DefCounter}}}}
+\addcontentsline{toc}{subsection}{Definición \arabic{DefCounter}}
+
+\vspace{10pt}
+
+#1
+
+\vspace{20pt}
+
+
+}
+
+\newcommand{\prop}[1]{
+\stepcounter{PropCounter}
+
+\textbf{\underline{\scalebox{1.1}{Propiedad \arabic{PropCounter}}}}
+\addcontentsline{toc}{subsection}{Propiedad \arabic{PropCounter}}
+
+\vspace{10pt}
+
+#1
+
+\vspace{20pt}
+
+
+}
+
+\newcommand{\propDem}[2]{
+\stepcounter{PropCounter}
+
+\textbf{\underline{\scalebox{1.1}{Propiedad \arabic{PropCounter}}}}
+\addcontentsline{toc}{subsection}{Propiedad \arabic{PropCounter}}
+
+\vspace{10pt}
+
+#1
+
+
+\vspace{10pt}
+
+\textbf{\underline{\scalebox{1.1}{Dem}}}
+
+\vspace{10pt}
+
+#2
+
+\vspace{20pt}
+
+}
 
 \begin{document}
 \maketitle
+\cleardoublepage
+\tableofcontents
 \cleardoublepage
 \section{Disclaimer}
 Este documento fue hecho como resumen de teoremas, propiedades, etc. para la materia \textit{Metodos Númericos} de la carrera \textit{Ciencias de la Computación} de la \textit{Facultad de Ciencias Exactas y Naturales}. De ninguna manera pretende remplazar las clases ni asegura estar completo/correcto. A su vez, las propiedades y sus demostraciones están basadas en mis apuntes de las clases al menos que se indique lo contrario. Esto quiere decir que puede no coincidir con demostraciones de otras fuentes o de otras cursadas.
@@ -32,7 +89,40 @@ En caso de encontrar algún posible error se recomienda verificarlo con un docen
 $A$ es simétrica.
 \end{center}
 \begin{center}
-$x^{t}Ax > 0$ $\forall x \neq \overrightarrow{0}$ con $x \in \mathbb{R}^{n}$
+$x^{t}Ax > 0$ $\forall x \neq \vec{0}$ con $x \in \mathbb{R}^{n}$
 \end{center}
+}
+
+\propDem{
+$A$ sdp $\Rightarrow$ $A$ es inversible.
+}
+{
+Supongamos $A$ no inversible. $\exists$ $x^{*} \neq \vec{0} / Ax^{*}=\vec{0} \Rightarrow {x^{*}}^{t}Ax^{*}=0$ Abs!
+}
+
+\prop{
+Sea $A$ simétrica. DP $\Leftrightarrow$ las submatrices principales son no singulares.
+\footnote{$\Rightarrow$ de teórica. $\Leftarrow$ ejercicio 9 de práctica 3}
+}
+
+\prop{
+Sea $A$ sdp $\Rightarrow$ $A=LU$
+}
+
+\prop{
+Sea $A$ sdp $\Leftrightarrow$ $A=LL^{t}$ (\textit{factorización de Cholesky}) donde $L$ es triangular inferior con no necesariamente $1$s en la diagonal.
+\footnote{$\Rightarrow$ de teórica. $\Leftarrow$ de ejercicio 8 de práctica 3 que dice
+\\
+Si $A=LL^{t}$ es una factorización de $A$ con $L$ una matriz triangular inferior con elementos de la diagonal positivos, $A$ es sdp.
+}
+}
+
+\prop{
+Sea $A$ sdp. $\forall x$, $y \in \mathbb{R}^{n}$
+\begin{itemize}
+\item Si $x$ e $y$ son l.i. $\vert x^{t}Ay \vert < \sqrt{x^{t}Ax}\sqrt{y^{t}Ay}$
+\item Si $x$ e $y$ son l.d. $\vert x^{t}Ay \vert = \sqrt{x^{t}Ax}\sqrt{y^{t}Ay}$
+\end{itemize}
+\footnote{Ejercicio 4 de práctica 3}
 }
 \end{document}
